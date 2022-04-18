@@ -1,0 +1,7 @@
+{
+  "name": "borribo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
