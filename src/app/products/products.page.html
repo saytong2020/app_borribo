@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title  color="primary"><strong >ផលិតផល និងសេវាកម្ម</strong></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-container">
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-left">
+      <ion-col *ngFor="let product of products" [routerLink]="['/','products', product.id]"  size="6" size-sm="6" size-md="4" size-lg="3" size-xl="4">
+        <ion-card class="ion-no-margin" mode="md">
+          <ion-thumbnail>
+            <ion-img [src]="'https://www.borribo.com.kh/LoanPicture/'+product.image">
+          </ion-img>
+          </ion-thumbnail><ion-card-content class="ion-no-padding">
+            <ion-text color="primary">
+              <h5><strong>{{product.title_kh}}</strong></h5>
+            </ion-text><ion-text color="primary"><p class="ion-margin">{{product.description_kh.substring(0, 40)}}...</p> </ion-text> 
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,292 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="jobs"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary"><strong>{{job?.title_kh}}</strong></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+
+      <ion-col size="12">
+        <ion-card mode="md" *ngIf="job">
+          <ion-img [src]="'https://www.borribo.com.kh/JobPicture/'+job?.image"></ion-img>
+
+
+        </ion-card>
+
+        <!-- <ion-row>
+          <ion-col size="12" class="ion-no-padding">
+            <ion-list lines="full">
+              <ion-item>
+                <ion-avatar slot="start">
+                  <img src="assets/avatars/avatar.png" />
+                </ion-avatar>
+                <ion-label><strong>{{job.author}}</strong></ion-label>
+                <ion-label class="ion-text-end">
+                  <ion-icon name="time-outline"></ion-icon><strong>1 hr</strong>
+                </ion-label>
+              </ion-item>
+
+            </ion-list>
+
+            <ion-list lines="none" class="ion-no-padding">
+              <ion-item>
+                <ion-icon name="folder-open-outline"></ion-icon>
+                <ion-label> ប្រភេទ : <strong>{{job.category}}</strong></ion-label>
+
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="navigate-circle-outline"></ion-icon>
+                <ion-label> ទីតាំង : <strong>{{job.location}}</strong></ion-label>
+
+              </ion-item>
+
+            </ion-list>
+
+
+
+          </ion-col>
+
+        </ion-row> -->
+        <ion-row>
+          <ion-col>
+            <ion-button id="open-modalStart{{job?.id}}" mode="ios" expand="block">ស្នើរសុំ ការងារ</ion-button>
+          </ion-col>
+        </ion-row>
+        
+
+
+        <ion-modal trigger="open-modalStart{{job?.id}}" mode="ios">
+
+          <ng-template>
+
+            <ion-header>
+              <ion-toolbar mode="md">
+
+                <ion-title color="primary"><strong>{{job?.title_kh}}</strong></ion-title>
+                <ion-buttons slot="primary">
+                  <ion-button (click)="onCancel()">
+                    <ion-icon slot="icon-only" name="close"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content>
+
+
+              <form [formGroup]="applyJobForm" (ngSubmit)="postJob()">
+
+                <ion-list>
+                  <!-- <ion-input type="hidden" name="id_job" formControlName="id_job" required></ion-input> -->
+                  <!-- ======== Name ======== -->
+                  <ion-item>
+
+                    <ion-label position="floating">
+                      ឈ្មោះ
+                    </ion-label>
+                    <ion-input type="text" name="name" formControlName="name" required>
+                    </ion-input>
+
+                  </ion-item>
+                  <ion-item class="erorr"
+                    *ngIf="applyJobForm.get('name').invalid && (applyJobForm.get('name').touched || applyJobForm.get('name').dirty)">
+                    <ion-text color="danger">
+                      <p><strong class="erorr">សូមបញ្ជូល ឈ្មោះឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "20" តួរអក្ស</strong></p>
+                    </ion-text>
+                  </ion-item>
+
+                  <!-- ======== Gender ======== -->
+
+                  <ion-item>
+                    <ion-label position="floating">ភេទ</ion-label>
+                    <ion-select name="gender" formControlName="gender" required>
+
+                      <ion-select-option value="1">ប្រុស</ion-select-option>
+                      <ion-select-option value="2">ស្រី</ion-select-option>
+
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item class="erorr"
+                    *ngIf="applyJobForm.get('gender').invalid && (applyJobForm.get('gender').touched || applyJobForm.get('gender').dirty)"
+                    lines="none">
+                    <ion-text color="danger">
+                      <p><strong class="erorr">សូមជ្រើសរើសប្រភេទ​ រូបិយប័ណ្ណ ឱ្យបានត្រឹមត្រូវ</strong></p>
+                    </ion-text>
+                  </ion-item>
+
+                  <!-- ======== Name ======== -->
+                  <ion-item>
+
+                    <ion-label position="floating">
+                      តូរនាទី
+                    </ion-label>
+                    <ion-input type="text" name="position" formControlName="position" required>
+                    </ion-input>
+
+                  </ion-item>
+                  <ion-item class="erorr"
+                    *ngIf="applyJobForm.get('position').invalid && (applyJobForm.get('position').touched || applyJobForm.get('position').dirty)">
+                    <ion-text color="danger">
+                      <p><strong class="erorr">សូមបញ្ជូល ឈ្មោះឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "12" តួរអក្ស</strong></p>
+                    </ion-text>
+                  </ion-item>
+
+                  <!-- ======== Phone ======== -->
+                  <ion-item>
+                    <ion-label position="floating">
+                      លេខទូរស័ព្ទ
+                    </ion-label>
+                    <ion-input type="text" name="phone" formControlName="phone" required>
+                    </ion-input>
+                  </ion-item>
+
+                  <ion-item class="erorr"
+                    *ngIf="applyJobForm.get('phone').invalid && (applyJobForm.get('phone').touched || applyJobForm.get('phone').dirty)">
+                    <ion-text color="danger">
+                      <p><strong class="erorr">សូមបញ្ជូល លេខទូរស័ព្ទឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "10" ខ្ទង់</strong></p>
+                    </ion-text>
+                  </ion-item>
+                  <!-- ======== Email ======== -->
+                  <ion-item>
+                    <ion-label position="floating">
+                      អុីម៉ែល
+                    </ion-label>
+                    <ion-input type="email" name="email" formControlName="email">
+                    </ion-input>
+                  </ion-item>
+                  <!-- ======== dob ======== -->
+
+                  <ion-item id="open-modal_date">
+
+                    <ion-label>ថ្ងៃ ខែ ឆ្នាំ កំណើត</ion-label>
+                    
+                      <ion-input type="text" name="dob" formControlName="dob" value="{{fromatedString}}" required></ion-input>
+                   
+                  </ion-item>
+
+
+                  <ion-modal id="datetime" trigger="open-modal_date">
+                    <ng-template>
+                      <ion-content>
+
+
+
+                        <ion-datetime  mode="md" size="cover"
+                          #datetime
+                           (ionChange)="dateChanged(datetime.value)" [showDefaultButtons]="true"
+                          (ionCancel)="showPicker = false"
+                         
+                          >
+
+                        </ion-datetime>
+                      </ion-content>
+                    </ng-template>
+                  </ion-modal>
+
+
+                  <!-- ======== adress ======== -->
+                  <ion-item>
+                    <ion-label position="floating">
+                      អាស័ដ្ឋាន
+                    </ion-label>
+                    <ion-input type="text" name="address" formControlName="address" required>
+                    </ion-input>
+                  </ion-item>
+
+                  <ion-item class="erorr"
+                    *ngIf="applyJobForm.get('address').invalid && (applyJobForm.get('address').touched || applyJobForm.get('address').dirty)">
+                    <ion-text color="danger">
+                      <p><strong class="erorr">សូមបញ្ជូល អាស័ដ្ឋានឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "50" ខ្ទង់</strong></p>
+                    </ion-text>
+                  </ion-item>
+
+                </ion-list>
+
+                <ion-button type="submit" [disabled]="!applyJobForm.valid" expand="block" color="primary" mode="ios"> បញ្ជូន
+                </ion-button>
+
+              </form>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+
+
+
+      </ion-col>
+
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text color="primary">
+          <h5 class="ion-margin"><strong>ការពិពណ៌នា</strong></h5>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text color="primary">
+          <p class="ion-margin" [innerHTML]="job?.description_kh">
+          </p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text color="primary">
+          <h5 class="ion-margin"><strong>តម្រូវការ</strong></h5>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text color="primary">
+          <p class="ion-margin" [innerHTML]="job?.requirement_kh"></p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text color="primary">
+          <h5 class="ion-margin"><strong>ការងារ ថ្មីៗ</strong></h5>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-slides mode="md" scrollbar="ios" [options]="option_job">
+          <ion-slide *ngFor="let items of latestJobs">
+            <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="4">
+              <ion-card class="ion-no-margin" mode="md" [routerLink]="['/','jobs', items.id]">
+                <ion-thumbnail>
+                  <ion-img class="thumnail" [src]="'https://www.borribo.com.kh/JobPicture/'+items.image">
+                  </ion-img>
+                </ion-thumbnail>
+
+                <ion-card-content class="ion-no-padding">
+                  <ion-text color="primary">
+                    <h5><strong>{{items.title_kh.substring(0, 44)}}</strong> <strong
+                        *ngIf="items.title_kh?.length >= 45">...</strong></h5>
+                  </ion-text>
+
+
+                </ion-card-content>
+
+              </ion-card>
+            </ion-col>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+
+
+    </ion-row>
+
+
+  </ion-grid>
+</ion-content>

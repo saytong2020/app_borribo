@@ -1,0 +1,208 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary"><strong>មត្តិយោបល់</strong></ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="compliantForm" (ngSubmit)="postCompliant()">
+
+    <ion-list>
+      <!-- <ion-input type="hidden" name="id_job" formControlName="id_job" required></ion-input> -->
+      <!-- ======== Name ======== -->
+      <ion-item>
+
+        <ion-label position="floating">
+          ឈ្មោះ
+        </ion-label>
+        <ion-input type="text" name="name" formControlName="name" required>
+        </ion-input>
+
+      </ion-item>
+      <ion-item class="erorr"
+        *ngIf="compliantForm.get('name').invalid && (compliantForm.get('name').touched || compliantForm.get('name').dirty)">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមបញ្ជូល ឈ្មោះឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "20" តួរអក្ស</strong></p>
+        </ion-text>
+      </ion-item>
+
+      <!-- ======== Gender ======== -->
+
+      <ion-item>
+        <ion-label position="floating">ភេទ</ion-label>
+        <ion-select name="gender" formControlName="gender" required>
+
+          <ion-select-option value="1">ប្រុស</ion-select-option>
+          <ion-select-option value="2">ស្រី</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="erorr"
+        *ngIf="compliantForm.get('gender').invalid && (compliantForm.get('gender').touched || compliantForm.get('gender').dirty)"
+        lines="none">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមជ្រើសរើសប្រភេទ​ ឱ្យបានត្រឹមត្រូវ</strong></p>
+        </ion-text>
+      </ion-item>
+
+     
+
+      <!-- ======== Phone ======== -->
+      <ion-item>
+        <ion-label position="floating">
+          លេខទូរស័ព្ទ
+        </ion-label>
+        <ion-input type="text" name="phone" formControlName="phone" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="erorr"
+        *ngIf="compliantForm.get('phone').invalid && (compliantForm.get('phone').touched || compliantForm.get('phone').dirty)">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមបញ្ជូល លេខទូរស័ព្ទឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "10" ខ្ទង់</strong></p>
+        </ion-text>
+      </ion-item>
+
+       <!-- ======== Phone ======== -->
+       <ion-item>
+        <ion-label position="floating">
+          អុីម៉ែល
+        </ion-label>
+        <ion-input type="text" name="email" formControlName="email">
+        </ion-input>
+      </ion-item>
+
+      
+      <!-- ======== Subject ======== -->
+      <ion-item>
+        <ion-label position="floating">
+          ប្រធានបទ
+        </ion-label>
+        <ion-input type="text" name="subject" formControlName="subject">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="erorr"
+      *ngIf="compliantForm.get('subject').invalid && (compliantForm.get('subject').touched || compliantForm.get('subject').dirty)">
+      <ion-text color="danger">
+        <p><strong class="erorr">សូមបញ្ជូល លេខទូរស័ព្ទឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "10" ខ្ទង់</strong></p>
+      </ion-text>
+    </ion-item>
+    <!-- ======== Description ======== -->
+    <ion-item>
+      <ion-label position="floating">
+        ពិពណ៌នាពាក្យបណ្តឹង
+      </ion-label>
+      <ion-textarea  name="compliant_description" formControlName="compliant_description" rows="5"></ion-textarea>
+      <ion-input type="text" name="subject" formControlName="subject">
+      </ion-input>
+    </ion-item>
+
+    <ion-item class="erorr"
+    *ngIf="compliantForm.get('compliant_description').invalid && (compliantForm.get('compliant_description').touched || compliantForm.get('compliant_description').dirty)">
+    <ion-text color="danger">
+      <p><strong class="erorr">សូមបញ្ជូល ច្រើនបំផុត "50" ខ្ទង់</strong></p>
+    </ion-text>
+  </ion-item>
+    
+
+    </ion-list>
+
+    <ion-button type="submit" [disabled]="!compliantForm.valid" expand="block" color="primary" mode="ios"> បញ្ជូន
+    </ion-button>
+
+  </form>
+
+<!-- 
+  <form #formReferice="ngForm" (ngSubmit)="onSubmit(formReferice)">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">
+        ឈ្មោះ 
+      </ion-label>
+        <ion-input type="text" ngModel name="fullName" required maxlength="20" #fullNameCtrl="ngModel">
+        </ion-input>
+
+      </ion-item>
+      <ion-item class="erorr" *ngIf="!fullNameCtrl.valid && fullNameCtrl.touched" lines="none">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមបញ្ជូល ឈ្មោះឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "12" តួរអក្ស</strong></p>
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          ទឹកប្រាក់
+        </ion-label>
+        <ion-input type="text" ngModel name="amount" required maxlength="5" #amountCtrl="ngModel">
+        </ion-input>
+
+      </ion-item>
+      <ion-item class="erorr" *ngIf="!amountCtrl.valid && amountCtrl.touched" lines="none">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមបញ្ជូល ចំនួនសាច់ប្រាក់ឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "5" ខ្ទង់</strong></p>
+        </ion-text>
+      </ion-item>
+     
+
+      <ion-item>
+        <ion-label position="floating">
+          លេខទូរស័ព្ទ
+        </ion-label>
+        <ion-input type="text" ngModel name="phone" required maxlength="10" #phoneCtrl="ngModel">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="erorr" *ngIf="!phoneCtrl.valid && phoneCtrl.touched" lines="none">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមបញ្ជូល លេខទូរស័ព្ទឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "10" ខ្ទង់</strong></p>
+        </ion-text>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="floating">
+          ប្រធានបទ
+        </ion-label>
+        <ion-textarea ngModel name="adress" required maxlength="50" #subjectCtrl="ngModel"></ion-textarea>
+        
+      </ion-item>
+
+      <ion-item class="erorr" *ngIf="!subjectCtrl.valid && subjectCtrl.touched" lines="none">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមបញ្ជូល អក្សរឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "50" ខ្ទង់</strong></p>
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          ការពិពណ៌នាអំពីពាក្យបណ្តឹង
+        </ion-label>
+        <ion-textarea ngModel name="adress" required maxlength="50" #descriptiontCtrl="ngModel"></ion-textarea>
+        
+      </ion-item>
+
+      <ion-item class="erorr" *ngIf="!descriptiontCtrl.valid && descriptiontCtrl.touched" lines="none">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមបញ្ជូល អក្សរឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "50" ខ្ទង់</strong></p>
+        </ion-text>
+      </ion-item>
+      
+
+
+    </ion-list>
+
+
+
+
+
+    <ion-button type="submit" [disabled]="!formReferice.valid" expand="block" color="primary"> បញ្ជូន
+    </ion-button>
+  </form> -->
+</ion-content>

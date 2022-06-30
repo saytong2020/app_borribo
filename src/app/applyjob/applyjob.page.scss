@@ -1,0 +1,26 @@
+.erorr {
+    font-size: 10pt;
+    margin-top: -10px;
+    z-index: 0;
+  }
+
+
+  #datetime {
+    --border-radius: 20px;
+  padding: 35% 20px 35% 20px;
+    
+  
+    ion-content {
+      --background: transparent;
+      ion-datetime {
+        text-align: center;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 50%;
+        
+        transform: translateY(-50%);
+        border-radius: 8px;
+      }
+    }
+  }

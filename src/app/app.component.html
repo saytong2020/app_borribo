@@ -1,3 +1,70 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="end" menuId="m1" contentId="main-menu">
+
+    <ion-content>
+      <ion-list class="ion-no-padding">
+        <ion-menu-toggle>
+
+          <ion-item color="primary">
+            <ion-avatar slot="start">
+              <img src="assets/avatars/avatar.png">
+            </ion-avatar>
+            <ion-label>
+              <h2>
+                <strong>
+                Tong
+              </strong>
+              </h2>
+              
+              <h2><strong>
+                  Say
+                </strong>
+              </h2>
+              <p>លេខសំគាល់: 001</p>
+
+            </ion-label>
+
+          </ion-item>
+          <ion-item lines="none" [routerLink]="['/', 'about']">
+            <ion-icon color="primary" name="business" slot="start"></ion-icon>
+            <ion-label color="primary"> <strong>អំពីយើង</strong> </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item  lines="none" [routerLink]="['/','location']">
+            <ion-icon  color="primary" slot="start" name="location"></ion-icon>
+            <ion-label color="primary"> <strong> ទីតាំង BORRIBO MFI </strong> </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item  lines="none" [routerLink]="['/','contact']">
+            <ion-icon color="primary" slot="start" name="call-sharp"></ion-icon>
+            <ion-label color="primary"> <strong> ទំនាក់ទំនងមកយើងខ្ញុំ </strong> </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item  lines="none" [routerLink]="['/']">
+            <ion-icon color="primary" name="reader" slot="start"></ion-icon>
+            <ion-label color="primary"> <strong> លក្ខខណ្ឌ </strong> </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item  lines="none" [routerLink]="['/']">
+            <ion-icon color="primary" name="cog" slot="start"></ion-icon>
+            <ion-label color="primary"> <strong> កំណត់ផ្សេងៗ </strong> </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" button>
+            <ion-icon color="primary" name="exit" slot="start"></ion-icon>
+            <ion-label color="primary"> <strong> ចាកចេញ </strong> </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+
+    </ion-content>
+
+  </ion-menu>
+
+  <ion-router-outlet id="main-menu"></ion-router-outlet>
 </ion-app>

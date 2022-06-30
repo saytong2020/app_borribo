@@ -1,0 +1,70 @@
+<ion-header color="primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary"><strong>ការងារ</strong></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content class="bg-container">
+   
+  <ion-refresher  slot ="fixed" disabled="false" (ionRefresh)="doRefresh($event)" pullFactor="0.5" pullMin="0" pullMax="150">  
+   <ion-refresher-content  
+    
+    
+    refreshingSpinner="crescent"  
+   ></ion-refresher-content>
+  </ion-refresher> 
+  <ion-grid>
+  
+    <ion-row class="ion-justify-left">
+      
+      <ion-col *ngFor="let job of jobs" [routerLink]="[job.id]" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+        <ion-card class="ion-no-margin" >
+          <ion-row>
+            <ion-col size="6">
+              <ion-thumbnail>
+                <ion-img class="thumnail" [src]="'https://www.borribo.com.kh/JobPicture/'+job.image"></ion-img>
+               
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="6">
+              <ion-card-content class="ion-no-padding">
+                <div class="title">
+                  <ion-card-title>
+                    <ion-text color="primary"><h5><strong>{{job.title_kh.substring(0,110)}}</strong><strong *ngIf="job.title_kh?.length > 100">...</strong></h5></ion-text>
+                   <!-- {{job.title_kh.substring(0, 45)}}... -->
+                  </ion-card-title>
+                  
+                  <ion-card-subtitle>ប្រភេទ: <strong>{{job.id_job_type}}</strong></ion-card-subtitle>
+                  <!-- <ion-card-subtitle>សាខា: <strong>ភ្នំពេញ</strong></ion-card-subtitle> -->
+                  <!-- <ion-list lines="none"class="ion-no-padding">
+                    <ion-item class="ion-no-padding">
+                      <ion-avatar slot="start">
+                        <img src="assets/avatars/avatar.png" />
+                      </ion-avatar>
+                      <ion-label><strong>{{jobs.author}}</strong></ion-label>
+                      <ion-label class="ion-text-end"> <ion-icon name="time-outline"></ion-icon><strong>1 hr</strong></ion-label>
+                    </ion-item>
+                    
+                  </ion-list> -->
+                </div>
+              </ion-card-content>
+
+             
+            </ion-col> 
+            
+          </ion-row>
+        </ion-card>
+        
+      </ion-col>
+      <ion-infinite-scroll class="ion-margin-top" threshold="5%" (ionInfinite)="loadJobsMore($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="crescent">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

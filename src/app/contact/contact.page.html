@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary"><strong>ទំនាក់ទំនង</strong></ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-container">
+        
+<div id="container">
+  <ion-row>
+
+        <ion-col size="12" size-sm="6" size-md="6" size-lg="6" size-xl="6">
+        <ion-img class=" ion-margin contact-icon"  src="assets/icon/call.png"></ion-img>
+        </ion-col>
+        <ion-col size="12" size-sm="6" size-md="6" size-lg="6" size-xl="4">
+          <ion-card-title class="ion-margin" color="primary">
+            <strong>ទំនាក់ទំនងមកកាន់យើងខ្ញុំ</strong>
+          </ion-card-title>
+          <ion-text class="ion-margin">
+            <p>
+              ទាក់ទង់មកកាន់យើងខ្ញុំបានរាល់
+              ម៉ោងធ្វើការ 07:30 ព្រឹក ដល់ 05:00 ល្ងាច
+               ច័ន្ទ ដល់ សៅរិ៍ 
+            </p>  
+          </ion-text>
+        </ion-col> 
+
+        
+      </ion-row>
+
+      <ion-button class="ion-margin" [routerLink]="['/','complaint']" expand="block" fill="outline" color="primary" mode="ios">មត្តិយោបល់</ion-button>
+
+      <ion-button class="ion-margin" expand="block" color="telegram" mode="ios">កម្មវិធីផ្ញើរសារ Telegram</ion-button>
+
+      <ion-button class="ion-margin" expand="block" color="facebook" mode="ios">កម្មវិធីផ្ញើរសារ Facebook</ion-button>
+
+      <ion-button class="ion-margin" expand="block" mode="ios">Call មកកាន់គ្រឹះស្ថាន</ion-button>
+
+         
+      
+    
+</div>
+ 
+
+</ion-content>

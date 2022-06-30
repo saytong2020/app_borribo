@@ -1,0 +1,6 @@
+{
+	"appId": "com.borribo.app",
+	"appName": "BorriboMFI",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

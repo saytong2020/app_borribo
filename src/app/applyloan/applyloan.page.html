@@ -1,0 +1,178 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary"><strong>ស្នើរសុំ់កម្ចី</strong></ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="applyloandForm" (ngSubmit)="postLoan()">
+
+    <ion-list>
+
+      <!-- ======== Name ======== -->
+      <ion-item>
+        <ion-label position="floating">
+          ឈ្មោះ
+        </ion-label>
+        <ion-input type="text" name="name" formControlName="name" required>
+        </ion-input>
+
+      </ion-item>
+      <ion-item class="erorr"
+        *ngIf="applyloandForm.get('name').invalid && (applyloandForm.get('name').touched || applyloandForm.get('name').dirty)">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមបញ្ជូល ឈ្មោះឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "12" តួរអក្ស</strong></p>
+        </ion-text>
+      </ion-item>
+
+      <!-- ======== currency ======== -->
+
+      <ion-item>
+        <ion-label position="floating">រូបិយប័ណ្ណ</ion-label>
+        <ion-select name="currency" formControlName="currency" required>
+
+          <ion-select-option value="ប្រាក់រៀល">ប្រាក់រៀល (៛)</ion-select-option>
+          <ion-select-option value="ប្រាក់ដុល្លា​​">ប្រាក់ដុល្លា​​ ($)</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="erorr"
+        *ngIf="applyloandForm.get('currency').invalid && (applyloandForm.get('currency').touched || applyloandForm.get('currency').dirty)"
+        lines="none">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមជ្រើសរើសប្រភេទ​ រូបិយប័ណ្ណ ឱ្យបានត្រឹមត្រូវ</strong></p>
+        </ion-text>
+      </ion-item>
+
+      <!-- ======== Name ======== -->
+      <ion-item>
+        <ion-label position="floating">
+          ទំហំទឹកប្រាក់
+        </ion-label>
+        <ion-input name="amount" type="text" formControlName="amount" required="">
+        </ion-input>
+
+      </ion-item>
+      <ion-item class="erorr"
+        *ngIf="applyloandForm.get('amount').invalid && (applyloandForm.get('amount').touched || applyloandForm.get('amount').dirty)">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមបញ្ជូល ចំនួនសាច់ប្រាក់ឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "10" ខ្ទង់</strong></p>
+        </ion-text>
+      </ion-item>
+
+      <!-- ======== Gender ======== -->
+
+      <ion-item>
+        <ion-label position="floating">ភេទ</ion-label>
+        <ion-select name="gender" formControlName="gender" required>
+
+          <ion-select-option value="1">ប្រុស</ion-select-option>
+          <ion-select-option value="2">ស្រី</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="erorr"
+        *ngIf="applyloandForm.get('gender').invalid && (applyloandForm.get('gender').touched || applyloandForm.get('gender').dirty)"
+        lines="none">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមជ្រើសរើសប្រភេទ​ រូបិយប័ណ្ណ ឱ្យបានត្រឹមត្រូវ</strong></p>
+        </ion-text>
+      </ion-item>
+      <!-- ======== Phone ======== -->
+      <ion-item>
+        <ion-label position="floating">
+          លេខទូរស័ព្ទ
+        </ion-label>
+        <ion-input type="text" name="phone" formControlName="phone" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="erorr"
+        *ngIf="applyloandForm.get('phone').invalid && (applyloandForm.get('phone').touched || applyloandForm.get('phone').dirty)">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមបញ្ជូល លេខទូរស័ព្ទឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "10" ខ្ទង់</strong></p>
+        </ion-text>
+      </ion-item>
+      <!-- ======== Aseet ======== -->
+
+      <ion-item>
+        <ion-label position="floating">ទ្រព្យ</ion-label>
+        <ion-select name="asset" formControlName="asset" required>
+
+          <ion-select-option value="កាតគ្រី">កាតគ្រី</ion-select-option>
+          <ion-select-option value="ប្លង់">ប្លង់</ion-select-option>
+          <ion-select-option value="ផ្សេងៗ">ផ្សេងៗ</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="erorr"
+        *ngIf="applyloandForm.get('asset').invalid && (applyloandForm.get('asset').touched || applyloandForm.get('asset').dirty)"
+        lines="none">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមជ្រើសរើស ឱ្យបានត្រឹមត្រូវ</strong></p>
+        </ion-text>
+      </ion-item>
+      <!-- ======== adress ======== -->
+      <ion-item>
+        <ion-label position="floating">
+          អាស័ដ្ឋាន
+        </ion-label>
+        <ion-input type="text" name="address" formControlName="address" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="erorr"
+        *ngIf="applyloandForm.get('address').invalid && (applyloandForm.get('address').touched || applyloandForm.get('address').dirty)">
+        <ion-text color="danger">
+          <p><strong class="erorr">សូមបញ្ជូល អាស័ដ្ឋានឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "50" ខ្ទង់</strong></p>
+        </ion-text>
+      </ion-item>
+
+
+
+    </ion-list>
+
+    <ion-button type="submit" mode="ios" [disabled]="!applyloandForm.valid" expand="block" color="primary"> បញ្ជូន
+    </ion-button>
+
+
+
+    <!-- <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">User Name</label>
+      <input type="text" name="username" formControlName="username"  class="form-control"
+        id="exampleInputEmail1" aria-describedby="emailHelp">
+      <div class="text-danger"
+        *ngIf="registerForm.get('username').invalid && (registerForm.get('username').touched || registerForm.get('username').dirty)">
+        Please Enter User Name</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email</label>
+      <input type="email" name="email" formControlName="email"  class="form-control" id="exampleInputEmail1"
+        aria-describedby="emailHelp">
+      <div class="text-danger"
+        *ngIf="registerForm.get('email').invalid && (registerForm.get('email').touched || registerForm.get('email').dirty)">
+        Please Enter Email</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Phone Number</label>
+      <input type="text" name="phone" formControlName="phone"  class="form-control"
+        id="exampleInputPassword1">
+      <div class="text-danger"
+        *ngIf="registerForm.get('phone').invalid && (registerForm.get('phone').touched || registerForm.get('phone').dirty)">
+        Please Enter Phone</div>
+
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Submit</button> -->
+  </form>
+
+
+</ion-content>
