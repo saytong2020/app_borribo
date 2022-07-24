@@ -18,6 +18,11 @@ export class JobsPage implements OnInit {
   subscribe: any;
 
   applyJobForm: any;
+  
+  contentLoader = false;
+
+  searchTerm: string;
+
   constructor(
    
     private jobsService: JobsService,
@@ -26,6 +31,10 @@ export class JobsPage implements OnInit {
     private router: Router
     ) 
     {
+
+      setTimeout(()=>{
+      this.contentLoader = true;
+    }, 3000);
 
       // this.subscribe = this.platform.backButton.subscribeWithPriority(666666,()=>{
       //   if(this.constructor.name == "JobsPage")
@@ -58,7 +67,7 @@ export class JobsPage implements OnInit {
 
   loadJob(event?){
     this.jobsService.getTopRatedJob(`jobs?page=${this.page}`).subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       this.jobs = this.jobs.concat(res['data']);
       this.max = res.last_page;
       if(event){
@@ -69,7 +78,7 @@ export class JobsPage implements OnInit {
 
   loadJobsMore(event){
     this.page++;
-    console.log(`page= ${this.page}, max_page = ${this.max}`);
+    // console.log(`page= ${this.page}, max_page = ${this.max}`);
     this.loadJob(event);
     if (this.page === this.max){
       event.target.disabled = true;
@@ -78,10 +87,10 @@ export class JobsPage implements OnInit {
   
 
   doRefresh(event) {  
-    console.log('Pull Event Triggered!');  
+    // console.log('Pull Event Triggered!');  
     setTimeout(() => {
       this.jobsService.getTopRatedJob(`jobs?page=${this.page}`).subscribe((res) => {
-        console.log(res);
+        // console.log(res);
         this.jobs = this.jobs.concat(res['data']);
         this.max = res.last_page;
         if(event){

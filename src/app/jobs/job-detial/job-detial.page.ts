@@ -1,5 +1,9 @@
 import { Observable } from 'rxjs';
-import { IonRouterOutlet, ActionSheetController, LoadingController } from '@ionic/angular';
+import {
+  IonRouterOutlet,
+  ActionSheetController,
+  LoadingController,
+} from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { Job } from './../job.model';
 import { JobsService } from './../../services/jobs.service';
@@ -8,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { format, parseISO } from 'date-fns';
-
+import { PickerController } from '@ionic/angular';
 @Component({
   selector: 'app-job-detial',
   templateUrl: './job-detial.page.html',
@@ -24,7 +28,8 @@ export class JobDetialPage implements OnInit {
   isLogin: any;
 
   applyJobForm: any;
-
+  genderString = '';
+  genderValue = '';
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -34,6 +39,7 @@ export class JobDetialPage implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private router: Router,
     private loadingCtrl: LoadingController,
+    private pickerCtrl:PickerController,
   ) {
     this.setToday();
   }
@@ -46,7 +52,7 @@ export class JobDetialPage implements OnInit {
       name: ['', [Validators.required, Validators.maxLength(20)]],
       position: ['', Validators.required],
       gender: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.minLength(9),Validators.maxLength(10)]],
       email: [''],
       dob: ['', Validators.required],
       address: ['', [Validators.required, Validators.maxLength(50)]],
@@ -63,9 +69,15 @@ export class JobDetialPage implements OnInit {
     });
   }
 
+
+onCancel() {
+    this.modalCtrl.dismiss(null, 'cancel');
+  }
+
+
   postJob() {
     console.log(this.applyJobForm.getRawValue());
-   
+
     const id = this.activatedRoute.snapshot.paramMap.get('jobId');
     this.jobsService
       .postJob('applyjobid/', id, this.applyJobForm.getRawValue())
@@ -84,13 +96,11 @@ export class JobDetialPage implements OnInit {
           return this.router.navigateByUrl('home');
         }, 3000);
       });
+
+      this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  onCancel() {
-    this.modalCtrl.dismiss(null, 'cancel');
-  }
-
-
+  
 
   setToday() {
     this.fromatedString = format(
@@ -118,4 +128,44 @@ export class JobDetialPage implements OnInit {
     autoplay: true,
     speed: 300,
   };
+
+  async  openPickerGender(){
+    const picker = await this.pickerCtrl.create({
+      columns: [
+        {
+          name: 'gender',
+          options: [
+            {
+              text: 'ប្រុស',
+              value: '1',
+            },
+            {
+              text: 'ស្រី',
+              value: '2',
+            },
+            
+          ],
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          
+          handler: (value) => {
+          
+            this.genderString = value.gender.text;
+            this.genderValue = value.gender.value;
+            
+          },
+        },
+      ],
+    });
+
+    await picker.present();
+  }
+
 }

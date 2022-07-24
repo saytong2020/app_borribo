@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-
+import { PickerController } from '@ionic/angular';
 @Component({
   selector: 'app-complaint',
   templateUrl: './complaint.page.html',
@@ -12,11 +12,15 @@ import { LoadingController } from '@ionic/angular';
 export class ComplaintPage implements OnInit {
   isLogin: any;
   compliantForm: any;
+  genderString = '';
+  genderValue = '';
   constructor(
     private formbuilder: FormBuilder,
     private compliantService: CompliantService,
     private router: Router,
     private loadingCtrl: LoadingController,
+    private pickerCtrl: PickerController,
+
   ) {}
 
   ngOnInit() {
@@ -53,6 +57,44 @@ export class ComplaintPage implements OnInit {
         }, 3000);
       });
 
+  }
+  async  openPickerGender(){
+    const picker = await this.pickerCtrl.create({
+      columns: [
+        {
+          name: 'gender',
+          options: [
+            {
+              text: 'ប្រុស',
+              value: '1',
+            },
+            {
+              text: 'ស្រី',
+              value: '2',
+            },
+            
+          ],
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          
+          handler: (value) => {
+          
+            this.genderString = value.gender.text;
+            this.genderValue = value.gender.value;
+            
+          },
+        },
+      ],
+    });
+
+    await picker.present();
   }
 
   

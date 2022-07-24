@@ -7,6 +7,7 @@ import { Product } from '../products/product.model';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
 import { Platform } from '@ionic/angular';
 
+
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom ]);
 
 @Component({
@@ -19,11 +20,18 @@ export class HomePage implements OnInit {
   loadedProducts: Product[] = [];
   loadedNews: News[];
   subscribe: any;
+
+  contenLoader = false;
   constructor(
     private productsService: ProductsService,
     private newsService: NewsService,
     public platform: Platform
   ) {
+
+    setTimeout(()=>{
+      this.contenLoader = true;
+    }, 3000);
+
     // this.subscribe = this.platform.backButton.subscribeWithPriority(666666,()=>{
     //   if(this.constructor.name == "HomePage")
     //   {

@@ -96,6 +96,10 @@ const routes: Routes = [
     path: 'applyloan',
     loadChildren: () => import('./applyloan/applyloan.module').then( m => m.ApplyloanPageModule)
   },
+  {
+    path: 'tong',
+    loadChildren: () => import('./tong/tong.module').then( m => m.TongPageModule)
+  },
 
 ];
 

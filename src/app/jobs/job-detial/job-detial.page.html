@@ -76,24 +76,26 @@
                 </ion-buttons>
               </ion-toolbar>
             </ion-header>
-            <ion-content>
+            <ion-content class="ion-justify-content-center">
 
 
               <form [formGroup]="applyJobForm" (ngSubmit)="postJob()">
-
+                <ion-card mode="ios" class="card">
+                  <ion-card-header color="primary"><strong>សូមបំពេញពត៌មាន ដើម្បីស្នើរសុំការងារ</strong></ion-card-header>
+                 
                 <ion-list>
                   <!-- <ion-input type="hidden" name="id_job" formControlName="id_job" required></ion-input> -->
                   <!-- ======== Name ======== -->
-                  <ion-item>
+                  <ion-item lines="none">
 
                     <ion-label position="floating">
-                      ឈ្មោះ
+                    <p>ឈ្មោះ</p>  
                     </ion-label>
-                    <ion-input type="text" name="name" formControlName="name" required>
+                    <ion-input class="input" type="text" name="name" formControlName="name" required>
                     </ion-input>
 
                   </ion-item>
-                  <ion-item class="erorr"
+                  <ion-item lines="none" class="erorr"
                     *ngIf="applyJobForm.get('name').invalid && (applyJobForm.get('name').touched || applyJobForm.get('name').dirty)">
                     <ion-text color="danger">
                       <p><strong class="erorr">សូមបញ្ជូល ឈ្មោះឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "20" តួរអក្ស</strong></p>
@@ -102,35 +104,36 @@
 
                   <!-- ======== Gender ======== -->
 
-                  <ion-item>
-                    <ion-label position="floating">ភេទ</ion-label>
-                    <ion-select name="gender" formControlName="gender" required>
-
-                      <ion-select-option value="1">ប្រុស</ion-select-option>
-                      <ion-select-option value="2">ស្រី</ion-select-option>
-
-                    </ion-select>
+                  <ion-item lines="none">
+                    <ion-label position="floating">
+                      <p>ភេទ</p>
+                    </ion-label>
+                    <ion-input class="input" type="text" (click)="openPickerGender()" formControlName="gender"
+                      placeholder="{{genderString}}"></ion-input>
+                    <ion-input type="text" hidden formControlName="gender" value="{{genderValue}}" required></ion-input>
+  
                   </ion-item>
-
-                  <ion-item class="erorr"
+  
+  
+                  <ion-item lines="none" class="erorr"
                     *ngIf="applyJobForm.get('gender').invalid && (applyJobForm.get('gender').touched || applyJobForm.get('gender').dirty)"
                     lines="none">
                     <ion-text color="danger">
-                      <p><strong class="erorr">សូមជ្រើសរើសប្រភេទ​ រូបិយប័ណ្ណ ឱ្យបានត្រឹមត្រូវ</strong></p>
+                      <p><strong class="erorr">សូមជ្រើសរើសប្រភេទ​</strong></p>
                     </ion-text>
                   </ion-item>
 
                   <!-- ======== Name ======== -->
-                  <ion-item>
+                  <ion-item lines="none">
 
                     <ion-label position="floating">
-                      តូរនាទី
+                    <p>តូរនាទី</p>  
                     </ion-label>
-                    <ion-input type="text" name="position" formControlName="position" required>
+                    <ion-input class="input" type="text" name="position" formControlName="position" required>
                     </ion-input>
 
                   </ion-item>
-                  <ion-item class="erorr"
+                  <ion-item lines="none" class="erorr"
                     *ngIf="applyJobForm.get('position').invalid && (applyJobForm.get('position').touched || applyJobForm.get('position').dirty)">
                     <ion-text color="danger">
                       <p><strong class="erorr">សូមបញ្ជូល ឈ្មោះឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "12" តួរអក្ស</strong></p>
@@ -138,35 +141,35 @@
                   </ion-item>
 
                   <!-- ======== Phone ======== -->
-                  <ion-item>
+                  <ion-item lines="none">
                     <ion-label position="floating">
-                      លេខទូរស័ព្ទ
+                    <p>លេខទូរស័ព្ទ</p>  
                     </ion-label>
-                    <ion-input type="text" name="phone" formControlName="phone" required>
+                    <ion-input class="input" type="text" name="phone" formControlName="phone" required>
                     </ion-input>
                   </ion-item>
 
-                  <ion-item class="erorr"
+                  <ion-item lines="none" class="erorr"
                     *ngIf="applyJobForm.get('phone').invalid && (applyJobForm.get('phone').touched || applyJobForm.get('phone').dirty)">
                     <ion-text color="danger">
                       <p><strong class="erorr">សូមបញ្ជូល លេខទូរស័ព្ទឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "10" ខ្ទង់</strong></p>
                     </ion-text>
                   </ion-item>
                   <!-- ======== Email ======== -->
-                  <ion-item>
+                  <ion-item lines="none">
                     <ion-label position="floating">
-                      អុីម៉ែល
+                    <p>អុីម៉ែល</p>  
                     </ion-label>
-                    <ion-input type="email" name="email" formControlName="email">
+                    <ion-input class="input" type="email" name="email" formControlName="email">
                     </ion-input>
                   </ion-item>
                   <!-- ======== dob ======== -->
 
-                  <ion-item id="open-modal_date">
+                  <ion-item lines="none" id="open-modal_date">
 
-                    <ion-label>ថ្ងៃ ខែ ឆ្នាំ កំណើត</ion-label>
+                    <ion-label position="floating"> <p>ថ្ងៃ ខែ ឆ្នាំ កំណើត</p> </ion-label>
                     
-                      <ion-input type="text" name="dob" formControlName="dob" value="{{fromatedString}}" required></ion-input>
+                      <ion-input class="input" type="text" name="dob" formControlName="dob"  value="{{fromatedString}}" required></ion-input>
                    
                   </ion-item>
 
@@ -191,26 +194,26 @@
 
 
                   <!-- ======== adress ======== -->
-                  <ion-item>
+                  <ion-item lines="none">
                     <ion-label position="floating">
-                      អាស័ដ្ឋាន
+                    <p>អាស័ដ្ឋាន</p>  
                     </ion-label>
-                    <ion-input type="text" name="address" formControlName="address" required>
+                    <ion-input class="input" type="text" name="address" formControlName="address" required>
                     </ion-input>
                   </ion-item>
 
-                  <ion-item class="erorr"
+                  <ion-item lines="none" class="erorr"
                     *ngIf="applyJobForm.get('address').invalid && (applyJobForm.get('address').touched || applyJobForm.get('address').dirty)">
                     <ion-text color="danger">
                       <p><strong class="erorr">សូមបញ្ជូល អាស័ដ្ឋានឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "50" ខ្ទង់</strong></p>
                     </ion-text>
                   </ion-item>
-
+<ion-button class="ion-margin" type="submit" [disabled]="!applyJobForm.valid" expand="block" color="primary" mode="ios"> បញ្ជូន
+                </ion-button>
                 </ion-list>
 
-                <ion-button type="submit" [disabled]="!applyJobForm.valid" expand="block" color="primary" mode="ios"> បញ្ជូន
-                </ion-button>
-
+                
+                </ion-card>
               </form>
             </ion-content>
           </ng-template>
@@ -222,31 +225,22 @@
 
     </ion-row>
     <ion-row>
-      <ion-col>
+      <ion-col class="ion-margin">
         <ion-text color="primary">
-          <h5 class="ion-margin"><strong>ការពិពណ៌នា</strong></h5>
+          <h5><strong>ការពិពណ៌នា</strong></h5>
         </ion-text>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
+      
         <ion-text color="primary">
-          <p class="ion-margin" [innerHTML]="job?.description_kh">
+          <p [innerHTML]="job?.description_kh">
           </p>
         </ion-text>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
+    
         <ion-text color="primary">
-          <h5 class="ion-margin"><strong>តម្រូវការ</strong></h5>
+          <h5><strong>តម្រូវការ</strong></h5>
         </ion-text>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
+    
         <ion-text color="primary">
-          <p class="ion-margin" [innerHTML]="job?.requirement_kh"></p>
+          <p [innerHTML]="job?.requirement_kh"></p>
         </ion-text>
       </ion-col>
     </ion-row>

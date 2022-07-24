@@ -5,9 +5,9 @@
     <ion-toolbar>
      
         <ion-buttons slot="end">
-          <ion-button color="primary" [routerLink]="['/', 'news']">
+          <!-- <ion-button color="primary" [routerLink]="['/', 'news']">
             <ion-icon slot="icon-only" name="notifications"></ion-icon>
-          </ion-button>
+          </ion-button> -->
           <ion-menu-button color="primary" menu="m1"></ion-menu-button>
           <!-- <ion-button (click)="onOpenMenu()">Open</ion-button> -->
         </ion-buttons>
@@ -183,7 +183,8 @@
 
           </ion-col>
         </ion-row>
-        <ion-row>
+
+        <ion-row *ngIf="contenLoader">
           <ion-col size="12">
             <swiper [config]="config">
              
@@ -195,9 +196,20 @@
         </swiper>
           </ion-col>
 
-  
-       
-      
+        </ion-row>
+
+        <ion-row *ngIf="!contenLoader">
+          <ion-col size="12">
+            <swiper [config]="config">
+             
+          <ng-template swiperSlide *ngFor="let products of loadedProducts" >
+            
+              <ion-skeleton-text animated style="width: 100%; height: 220px; border-radius: 20px;"></ion-skeleton-text>
+              
+              </ng-template>
+        </swiper>
+          </ion-col>
+
         </ion-row>
 
 

@@ -3,3 +3,73 @@
     margin-top: -10px;
     z-index: 0;
   }
+
+
+  
+
+
+.item{
+  width: 100%;
+}
+.item-input{
+  padding: .25em;
+  
+}
+.input-label{
+  margin-right: 5px;
+  
+  background-color: #fff;
+ font-weight: bold;
+  
+}
+
+ion-label{
+   
+  p{
+    margin-left: 10px; 
+    
+    color: var(--ion-color-primary);
+  }
+ 
+  z-index: 5000;
+}
+ ion-input{
+
+  width: 100%;
+  margin-top: -10px;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  padding: 10px ;
+  padding-left: 20px;
+  color: var(--ion-color-primary);
+  --placeholder-opacity: 100%;
+ 
+ }
+
+ .input{
+  --padding-start: 10px;
+ }
+
+ 
+ ion-textarea{
+  width: 100%;
+  margin-top: -10px;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  padding: 10px ;
+  
+  color: var(--ion-color-primary);
+  
+}
+ion-select{
+  --placeholder-opacity: 100%;
+  
+  width: 100%;
+  height: 45px;
+  margin-top: -10px;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  padding:  25em;
+  color: var(--ion-color-primary);
+}
+

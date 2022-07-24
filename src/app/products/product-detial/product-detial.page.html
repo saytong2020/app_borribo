@@ -27,6 +27,8 @@
       </ion-col>
 
     </ion-row>
+
+    
     <ion-row>
       <ion-col>
         <ion-button id="open-modalStart{{product?.id}}" expand="block" mode="ios">
@@ -55,138 +57,147 @@
         <ion-content>
 
           <form [formGroup]="applyloandForm" (ngSubmit)="applyLoan()">
+            <ion-card mode="ios">
+              <ion-card-header color="primary"><strong>សូមបំពេញពត៌មាន ដើម្បីស្នើរសុំប្រាក់កម្ចី</strong>
+              </ion-card-header>
 
-            <ion-list>
-              <ion-input type="hidden" name="id_loan" formControlName="id_loan" required></ion-input>
-              <!-- ======== Name ======== -->
-              <ion-item>
+              <ion-list>
+                <ion-input type="hidden" name="id_loan" formControlName="id_loan" required></ion-input>
+                <!-- ======== Name ======== -->
+                <ion-item lines="none">
 
-                <ion-label position="floating">
-                  ឈ្មោះ
-                </ion-label>
-                <ion-input type="text" name="name" formControlName="name" required>
-                </ion-input>
+                  <ion-label position="floating">
+                    <p>ឈ្មោះ</p>
+                  </ion-label>
+                  <ion-input class="input" type="text" name="name" formControlName="name" required>
+                  </ion-input>
 
-              </ion-item>
-              <ion-item class="erorr"
-                *ngIf="applyloandForm.get('name').invalid && (applyloandForm.get('name').touched || applyloandForm.get('name').dirty)">
-                <ion-text color="danger">
-                  <p><strong class="erorr">សូមបញ្ជូល ឈ្មោះឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "12" តួរអក្ស</strong></p>
-                </ion-text>
-              </ion-item>
+                </ion-item>
+                <ion-item lines="none" class="erorr"
+                  *ngIf="applyloandForm.get('name').invalid && (applyloandForm.get('name').touched || applyloandForm.get('name').dirty)">
+                  <ion-text color="danger">
+                    <p><strong class="erorr">សូមបញ្ជូល ឈ្មោះឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "12" តួរអក្ស</strong></p>
+                  </ion-text>
+                </ion-item>
 
-              <!-- ======== currency ======== -->
+                <!-- ======== currency ======== -->
 
-              <ion-item>
-                <ion-label position="floating">រូបិយប័ណ្ណ</ion-label>
-                <ion-select name="currency" formControlName="currency" required>
 
-                  <ion-select-option value="ប្រាក់រៀល">ប្រាក់រៀល (៛)</ion-select-option>
-                  <ion-select-option value="ប្រាក់ដុល្លា​​">ប្រាក់ដុល្លា​​ ($)</ion-select-option>
+                <ion-item lines="none">
+                  <ion-label position="floating">
+                    <p> រូបិយប័ណ្ណ</p>
+                  </ion-label>
+                  <ion-input class="input" type="text" (click)="openPickerCurrency()" formControlName="currency"
+                    value="{{currencyString}}" required></ion-input>
 
-                </ion-select>
-              </ion-item>
 
-              <ion-item class="erorr"
-                *ngIf="applyloandForm.get('currency').invalid && (applyloandForm.get('currency').touched || applyloandForm.get('currency').dirty)"
-                lines="none">
-                <ion-text color="danger">
-                  <p><strong class="erorr">សូមជ្រើសរើសប្រភេទ​ រូបិយប័ណ្ណ ឱ្យបានត្រឹមត្រូវ</strong></p>
-                </ion-text>
-              </ion-item>
+                </ion-item>
 
-              <!-- ======== Name ======== -->
-              <ion-item>
-                <ion-label position="floating">
-                  ទំហំទឹកប្រាក់
-                </ion-label>
-                <ion-input name="amount" type="text" formControlName="amount" required="">
-                </ion-input>
+                <ion-item lines="none" class="erorr"
+                  *ngIf="applyloandForm.get('currency').invalid && (applyloandForm.get('currency').touched || applyloandForm.get('currency').dirty)"
+                  lines="none">
+                  <ion-text color="danger">
+                    <p><strong class="erorr">សូមជ្រើសរើសប្រភេទ​ រូបិយប័ណ្ណ ឱ្យបានត្រឹមត្រូវ</strong></p>
+                  </ion-text>
+                </ion-item>
 
-              </ion-item>
-              <ion-item class="erorr"
-                *ngIf="applyloandForm.get('amount').invalid && (applyloandForm.get('amount').touched || applyloandForm.get('amount').dirty)">
-                <ion-text color="danger">
-                  <p><strong class="erorr">សូមបញ្ជូល ចំនួនសាច់ប្រាក់ឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "10" ខ្ទង់</strong>
-                  </p>
-                </ion-text>
-              </ion-item>
+                <!-- ======== Name ======== -->
+                <ion-item lines="none">
+                  <ion-label position="floating">
+                    <p>ទំហំទឹកប្រាក់</p>
+                  </ion-label>
+                  <ion-input class="input" name="amount" type="text" formControlName="amount" required="">
+                  </ion-input>
 
-              <!-- ======== Gender ======== -->
+                </ion-item>
+                <ion-item lines="none" class="erorr"
+                  *ngIf="applyloandForm.get('amount').invalid && (applyloandForm.get('amount').touched || applyloandForm.get('amount').dirty)">
+                  <ion-text color="danger">
+                    <p><strong class="erorr">សូមបញ្ជូល ចំនួនសាច់ប្រាក់ឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "10" ខ្ទង់</strong>
+                    </p>
+                  </ion-text>
+                </ion-item>
 
-              <ion-item>
-                <ion-label position="floating">ភេទ</ion-label>
-                <ion-select name="gender" formControlName="gender" required>
 
-                  <ion-select-option value="1">ប្រុស</ion-select-option>
-                  <ion-select-option value="2">ស្រី</ion-select-option>
 
-                </ion-select>
-              </ion-item>
+                <!-- ======== Gender ======== -->
 
-              <ion-item class="erorr"
-                *ngIf="applyloandForm.get('gender').invalid && (applyloandForm.get('gender').touched || applyloandForm.get('gender').dirty)"
-                lines="none">
-                <ion-text color="danger">
-                  <p><strong class="erorr">សូមជ្រើសរើសប្រភេទ​ រូបិយប័ណ្ណ ឱ្យបានត្រឹមត្រូវ</strong></p>
-                </ion-text>
-              </ion-item>
-              <!-- ======== Phone ======== -->
-              <ion-item>
-                <ion-label position="floating">
-                  លេខទូរស័ព្ទ
-                </ion-label>
-                <ion-input type="text" name="phone" formControlName="phone" required>
-                </ion-input>
-              </ion-item>
+                <ion-item lines="none">
+                  <ion-label position="floating">
+                    <p>ភេទ</p>
+                  </ion-label>
+                  <ion-input class="input" type="text" (click)="openPickerGender()" formControlName="gender"
+                    placeholder="{{genderString}}"></ion-input>
+                  <ion-input type="text" hidden formControlName="gender" value="{{genderValue}}" required></ion-input>
 
-              <ion-item class="erorr"
-                *ngIf="applyloandForm.get('phone').invalid && (applyloandForm.get('phone').touched || applyloandForm.get('phone').dirty)">
-                <ion-text color="danger">
-                  <p><strong class="erorr">សូមបញ្ជូល លេខទូរស័ព្ទឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "10" ខ្ទង់</strong></p>
-                </ion-text>
-              </ion-item>
-              <!-- ======== Aseet ======== -->
+                </ion-item>
 
-              <ion-item>
-                <ion-label position="floating">ទ្រព្យ</ion-label>
-                <ion-select name="asset" formControlName="asset" required>
 
-                  <ion-select-option value="កាតគ្រី">កាតគ្រី</ion-select-option>
-                  <ion-select-option value="ប្លង់">ប្លង់</ion-select-option>
-                  <ion-select-option value="ផ្សេងៗ">ផ្សេងៗ</ion-select-option>
+                <ion-item lines="none" class="erorr"
+                  *ngIf="applyloandForm.get('gender').invalid && (applyloandForm.get('gender').touched || applyloandForm.get('gender').dirty)"
+                  lines="none">
+                  <ion-text color="danger">
+                    <p><strong class="erorr">សូមជ្រើសរើសប្រភេទ​</strong></p>
+                  </ion-text>
+                </ion-item>
+                <!-- ======== Phone ======== -->
+                <ion-item lines="none">
+                  <ion-label position="floating">
+                    <p>លេខទូរស័ព្ទ</p>
+                  </ion-label>
+                  <ion-input class="input" type="text" name="phone" formControlName="phone" required>
+                  </ion-input>
+                </ion-item>
 
-                </ion-select>
-              </ion-item>
+                <ion-item lines="none" class="erorr"
+                  *ngIf="applyloandForm.get('phone').invalid && (applyloandForm.get('phone').touched || applyloandForm.get('phone').dirty)">
+                  <ion-text color="danger">
+                    <p><strong class="erorr">សូមបញ្ជូល លេខទូរស័ព្ទឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "10" ខ្ទង់</strong></p>
+                  </ion-text>
+                </ion-item>
+                <!-- ======== Aseet ======== -->
 
-              <ion-item class="erorr"
-                *ngIf="applyloandForm.get('asset').invalid && (applyloandForm.get('asset').touched || applyloandForm.get('asset').dirty)"
-                lines="none">
-                <ion-text color="danger">
-                  <p><strong class="erorr">សូមជ្រើសរើស ឱ្យបានត្រឹមត្រូវ</strong></p>
-                </ion-text>
-              </ion-item>
-              <!-- ======== adress ======== -->
-              <ion-item>
-                <ion-label position="floating">
-                  អាស័ដ្ឋាន
-                </ion-label>
-                <ion-input type="text" name="address" formControlName="address" required>
-                </ion-input>
-              </ion-item>
+                <ion-item lines="none">
+                  <ion-label position="floating">
+                    <p>ទ្រព្យ</p>
+                  </ion-label>
 
-              <ion-item class="erorr"
-                *ngIf="applyloandForm.get('address').invalid && (applyloandForm.get('address').touched || applyloandForm.get('address').dirty)">
-                <ion-text color="danger">
-                  <p><strong class="erorr">សូមបញ្ជូល អាស័ដ្ឋានឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "50" ខ្ទង់</strong></p>
-                </ion-text>
-              </ion-item>
+                  <ion-input class="input" type="text" (click)="openPickerAsset()" formControlName="asset" value="{{assetValue}}"
+                    required></ion-input>
 
-            </ion-list>
 
-            <ion-button type="submit" [disabled]="!applyloandForm.valid" expand="block" color="primary" mode="ios">
-              បញ្ជូន
-            </ion-button>
+
+                </ion-item>
+
+                <ion-item lines="none" class="erorr"
+                  *ngIf="applyloandForm.get('asset').invalid && (applyloandForm.get('asset').touched || applyloandForm.get('asset').dirty)"
+                  lines="none">
+                  <ion-text color="danger">
+                    <p><strong class="erorr">សូមជ្រើសរើស ឱ្យបានត្រឹមត្រូវ</strong></p>
+                  </ion-text>
+                </ion-item>
+                <!-- ======== adress ======== -->
+                <ion-item lines="none">
+                  <ion-label position="floating">
+                    <p>អាស័ដ្ឋាន</p>
+                  </ion-label>
+                  <ion-input class="input" type="text" name="address" formControlName="address" required>
+                  </ion-input>
+                </ion-item>
+
+                <ion-item lines="none" class="erorr"
+                  *ngIf="applyloandForm.get('address').invalid && (applyloandForm.get('address').touched || applyloandForm.get('address').dirty)">
+                  <ion-text color="danger">
+                    <p><strong class="erorr">សូមបញ្ជូល អាស័ដ្ឋានឱ្យបានត្រឹមត្រូវ ច្រើនបំផុត "50" ខ្ទង់</strong></p>
+                  </ion-text>
+                </ion-item>
+                <ion-button  class="ion-margin"  type="submit" [disabled]="!applyloandForm.valid" expand="block" color="primary" mode="ios">
+                  បញ្ជូន
+                </ion-button>
+              </ion-list>
+
+
+            </ion-card>
 
           </form>
 
@@ -226,25 +237,25 @@
             </a>
             <a href="tel:+85587838688">
               <ion-item>
-              <ion-col size="2">
-                <ion-icon color="primary" name="call-outline"></ion-icon>
-              </ion-col>
-              <ion-col size="10">
-                <ion-card-title color="primary"> <strong>087 838 688</strong> </ion-card-title>
-              </ion-col>
+                <ion-col size="2">
+                  <ion-icon color="primary" name="call-outline"></ion-icon>
+                </ion-col>
+                <ion-col size="10">
+                  <ion-card-title color="primary"> <strong>087 838 688</strong> </ion-card-title>
+                </ion-col>
 
-            </ion-item>
+              </ion-item>
             </a>
             <a href="mailto:bmimfi@borribo.com.kh">
-            <ion-item>
-              <ion-col size="2">
-                <ion-icon color="primary" name="mail-outline"></ion-icon>
-              </ion-col>
-              <ion-col size="10">
-                <ion-card-title color="primary"><strong>bmimfi@borribo.com.kh</strong> </ion-card-title>
-              </ion-col>
-            </ion-item>
-          </a>
+              <ion-item>
+                <ion-col size="2">
+                  <ion-icon color="primary" name="mail-outline"></ion-icon>
+                </ion-col>
+                <ion-col size="10">
+                  <ion-card-title color="primary"><strong>bmimfi@borribo.com.kh</strong> </ion-card-title>
+                </ion-col>
+              </ion-item>
+            </a>
 
           </ion-list>
         </ion-card>

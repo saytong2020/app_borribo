@@ -10,8 +10,11 @@
 <ion-content class="bg-container">
 
   <ion-grid fixed>
-    <ion-row class="ion-justify-content-left">
-      <ion-col *ngFor="let product of products" [routerLink]="['/','products', product.id]"  size="6" size-sm="6" size-md="4" size-lg="3" size-xl="4">
+    <ion-row *ngIf="contentLoader" class="ion-justify-content-left">
+      
+
+      
+      <ion-col  *ngFor="let product of products" [routerLink]="['/','products', product.id]"  size="6" size-sm="6" size-md="4" size-lg="3" size-xl="4">
         <ion-card class="ion-no-margin" mode="md">
           <ion-thumbnail>
             <ion-img [src]="'https://www.borribo.com.kh/LoanPicture/'+product.image">
@@ -23,7 +26,25 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-    </ion-row>
+
+   </ion-row>
+   <ion-row *ngIf="!contentLoader" class="ion-justify-content-left">
+      <ion-col *ngFor="let product of products"  size="6" size-sm="6" size-md="4" size-lg="3" size-xl="4">
+        <ion-card class="ion-no-margin" mode="md">
+          <ion-thumbnail>
+            <ion-skeleton-text animated style="width: 100%; height: 130px"></ion-skeleton-text>
+          
+          </ion-thumbnail>
+          <ion-card-content class="ion-no-padding">
+            <ion-text color="primary">
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+              <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-text> 
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+   </ion-row>
   </ion-grid>
 
 </ion-content>

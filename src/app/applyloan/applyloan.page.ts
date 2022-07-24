@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { ProductsService } from './../services/products.service';
 import { LoadingController } from '@ionic/angular';
+import { PickerController } from '@ionic/angular';
 
 @Component({
   selector: 'app-applyloan',
@@ -13,18 +14,25 @@ export class ApplyloanPage implements OnInit {
   isLogin: any;
   applyloandForm: any;
 
+  currencyString = '';
+  genderString ='';
+  genderValue='';
+  assetString='';
+  assetValue='';
+
   constructor(
     private formBuilder:FormBuilder,
     private productsService: ProductsService,
     private router: Router,
     private loadingCtrl: LoadingController,
+    private pickerCtrl: PickerController
     ) { }
 
   ngOnInit() {
 
     this.applyloandForm = this.formBuilder.group (
       {
-        name: ['',[Validators.required,Validators.maxLength(12)]],
+        name: ['',[Validators.required,Validators.maxLength(20)]],
         currency: ['',Validators.required],
         amount: ['',[Validators.required,Validators.minLength(3),Validators.maxLength(10)]],
         gender: ['',Validators.required],
@@ -84,5 +92,127 @@ export class ApplyloanPage implements OnInit {
     
 
   // }
+
+
+  async openPickerCurrency() {
+    const picker = await this.pickerCtrl.create({
+      columns: [
+        {
+          name: 'currency',
+          options: [
+            {
+              text: 'ប្រាក់រៀល (៛)',
+              value: 'ប្រាក់រៀល',
+            },
+            {
+              text: 'ប្រាក់ដុល្លា​​ ($)',
+              value: 'ប្រាក់ដុល្លា​​',
+            },
+            
+          ],
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          
+          handler: (value) => {
+            this.currencyString = value.currency.value;
+          },
+        },
+      ],
+    });
+
+    await picker.present();
+  }
+
+
+ async  openPickerGender(){
+    const picker = await this.pickerCtrl.create({
+      columns: [
+        {
+          name: 'gender',
+          options: [
+            {
+              text: 'ប្រុស',
+              value: '1',
+            },
+            {
+              text: 'ស្រី',
+              value: '2',
+            },
+            
+          ],
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          
+          handler: (value) => {
+          
+            this.genderString = value.gender.text;
+            this.genderValue = value.gender.value;
+            
+          },
+        },
+      ],
+    });
+
+    await picker.present();
+  }
+
+
+
+async  openPickerAsset(){
+    const picker = await this.pickerCtrl.create({
+      columns: [
+        {
+          name: 'asset',
+          options: [
+            {
+              text: 'កាតគ្រី',
+              value: 'កាតគ្រី',
+            },
+            {
+              text: 'ប្លង់',
+              value: 'ប្លង់',
+            },
+            {
+              text: 'ផ្សេងៗ',
+              value: 'ផ្សេងៗ',
+            },
+            
+          ],
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          
+          handler: (value) => {
+          
+          
+            this.assetValue = value.asset.value;
+            
+          },
+        },
+      ],
+    });
+
+    await picker.present();
+  }
 
 }
