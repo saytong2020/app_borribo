@@ -7,16 +7,156 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="bg-container">        
-<div id="container">
-  <ion-row>
-    <ion-col size="12" size-sm="6" size-md="6" size-lg="6" size-xl="4">
-          <ion-card-title class="ion-margin" color="primary">
-            <strong>Comming soon ...</strong>
-          </ion-card-title>
-        </ion-col> 
-</ion-row>
-   
-</div>
+<ion-segment color="primary" mode="md" (ionChange)="segmentCalculator($event)" value="khr">
+  <ion-segment-button value="khr">
+    <ion-label><strong>គណនាកម្ចីប្រាក់រៀល (៛)</strong></ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="usd">
+    <ion-label><strong>គណនាកម្ចីប្រាក់ដុល្លា ($)</strong></ion-label>
+  </ion-segment-button>
+</ion-segment>
 
-</ion-content>
+<ion-content>
+  <form [formGroup]="calculatorFrom" (ngSubmit)="LoanCalcu()">
+    <ion-row>
+      <ion-col size-lg="8" offset-lg="2">
+        <ion-card class="ion-no-margin" mode="ios">
+          <ion-card-header color="primary"><strong>ការគណនាប្រាក់កម្ចី</strong></ion-card-header>
+
+          <ion-list>
+            <!-- <ion-input type="hidden" name="id_job" formControlName="id_job" required></ion-input> -->
+
+
+            <!-- ======== Loan Amount ======== -->
+            <ion-item *ngIf=" calculatChanged == true " lines="none">
+
+              <ion-label position="floating">
+                <p>ចំនួនប្រាក់កម្ចី (៛)</p>
+              </ion-label>
+              <ion-input mode="ios" class="input" type="number" maxlength="11" name="loanAmount"
+                formControlName="loanAmount" required>
+              </ion-input>
+
+            </ion-item>
+            <ion-item *ngIf=" calculatChanged == false " lines="none">
+
+              <ion-label position="floating">
+                <p>ចំនួនប្រាក់កម្ចី ($)</p>
+              </ion-label>
+              <ion-input mode="ios" class="input" type="number" maxlength="11" name="loanAmount"
+                formControlName="loanAmount" required>
+              </ion-input>
+
+            </ion-item>
+            <ion-item lines="none" class="erorr"
+              *ngIf="calculatorFrom.get('loanAmount').invalid && (calculatorFrom.get('loanAmount').touched || calculatorFrom.get('loanAmount').dirty)">
+              <ion-text color="danger">
+                <p><strong class="erorr">សូមបញ្ជូល ចំនួនប្រាក់កម្ចី</strong></p>
+              </ion-text>
+            </ion-item>
+
+            <!-- ======== Loan Term ======== -->
+            <ion-item lines="none">
+              <ion-label position="floating">
+                <p>រយៈពេលកម្ចី (ខែ)</p>
+              </ion-label>
+              <ion-input class="input" type="number" name="loanTerm" formControlName="loanTerm" required>
+              </ion-input>
+            </ion-item>
+
+            <ion-item lines="none" class="erorr"
+              *ngIf="calculatorFrom.get('loanTerm').invalid && (calculatorFrom.get('loanTerm').touched || calculatorFrom.get('loanTerm').dirty)">
+              <ion-text color="danger">
+                <p><strong class="erorr">សូមបញ្ជូល រយៈពេលកម្ចី</strong></p>
+              </ion-text>
+            </ion-item>
+
+
+            <!-- ======== Loan Rate ======== -->
+            <ion-item lines="none">
+              <ion-label position="floating">
+                <p>អត្រាការប្រាក់ (%) / ខែ</p>
+              </ion-label>
+              <ion-input class="input" type="number" formControlName="loanRate" value="{{rateValue}}" required>
+              </ion-input>
+            </ion-item>
+
+            <ion-item lines="none" class="erorr"
+              *ngIf="calculatorFrom.get('loanRate').invalid && (calculatorFrom.get('loanRate').touched || calculatorFrom.get('loanRate').dirty)">
+              <ion-text color="danger">
+                <p><strong class="erorr">សូមបញ្ជូល អត្រាការប្រាក់​</strong></p>
+              </ion-text>
+            </ion-item>
+
+
+          </ion-list>
+
+          <ion-button class="ion-margin" type="submit" [disabled]="!calculatorFrom.valid" expand="block" color="primary"
+            mode="ios"> គណនា
+          </ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-lg="8" offset-lg="2">
+        <ion-card class="ion-no-margin" mode="ios">
+          <ion-card-header color="primary"><strong>លិទ្ធផល​​</strong></ion-card-header>
+
+          <ion-list>
+            <!-- <ion-input type="hidden" name="id_job" formControlName="id_job" required></ion-input> -->
+
+
+            <!-- ======== Total Icome ======== -->
+            <ion-item *ngIf=" calculatChanged == true " lines="none">
+
+              <ion-label position="floating">
+                <p>ប្រាក់ត្រូវបង់សរុប (៛)</p>
+              </ion-label>
+              <ion-input  mode="ios" class="input" type="number" maxlength="11" 
+                value="{{total}}" required>
+              </ion-input>
+
+            </ion-item>
+            <ion-item *ngIf=" calculatChanged == false " lines="none">
+
+              <ion-label position="floating">
+                <p>ប្រាក់ត្រូវបង់សរុប ($)</p>
+              </ion-label>
+              <ion-input  mode="ios" class="input" type="number" maxlength="11"
+                 value="{{total}}" required>
+              </ion-input>
+
+            </ion-item>
+            
+
+            <!-- ======== Interest ======== -->
+            <ion-item *ngIf=" calculatChanged == true " lines="none">
+
+              <ion-label position="floating">
+                <p>ការប្រាក់ (៛)</p>
+              </ion-label>
+              <ion-input  mode="ios" class="input" type="number"  maxlength="11" 
+                 value="{{interest}}" required>
+              </ion-input>
+
+            </ion-item>
+            <ion-item *ngIf=" calculatChanged == false " lines="none">
+
+              <ion-label position="floating">
+                <p>ការប្រាក់ ($)</p>
+              </ion-label>
+              <ion-input  mode="ios" class="input" type="number" maxlength="11"
+               value="{{interest}}" required>
+              </ion-input>
+
+            </ion-item>
+          </ion-list>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+
+</ion-content> 

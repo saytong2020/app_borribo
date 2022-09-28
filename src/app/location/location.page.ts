@@ -12,6 +12,7 @@ declare var google:any;
   styleUrls: ['./location.page.scss'],
 })
 export class LocationPage implements OnInit {
+  
   iconImage:any='assets/icon/borribo-map.png';
   map: any;
 

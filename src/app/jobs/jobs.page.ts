@@ -32,9 +32,6 @@ export class JobsPage implements OnInit {
     ) 
     {
 
-      setTimeout(()=>{
-      this.contentLoader = true;
-    }, 3000);
 
       // this.subscribe = this.platform.backButton.subscribeWithPriority(666666,()=>{
       //   if(this.constructor.name == "JobsPage")
@@ -66,6 +63,7 @@ export class JobsPage implements OnInit {
   }
 
   loadJob(event?){
+    this.contentLoader = false;
     this.jobsService.getTopRatedJob(`jobs?page=${this.page}`).subscribe((res) => {
       // console.log(res);
       this.jobs = this.jobs.concat(res['data']);
@@ -73,6 +71,7 @@ export class JobsPage implements OnInit {
       if(event){
         event.target.complete();
       }
+      this.contentLoader=true;
     });
   }
 
@@ -87,12 +86,14 @@ export class JobsPage implements OnInit {
   
 
   doRefresh(event) {  
+    this.contentLoader=false;
     // console.log('Pull Event Triggered!');  
     setTimeout(() => {
       this.jobsService.getTopRatedJob(`jobs?page=${this.page}`).subscribe((res) => {
         // console.log(res);
         this.jobs = this.jobs.concat(res['data']);
         this.max = res.last_page;
+        this.contentLoader=true;
         if(event){
           event.target.complete();
         }

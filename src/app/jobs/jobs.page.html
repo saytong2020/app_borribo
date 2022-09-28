@@ -68,15 +68,12 @@
         </ion-card>
 
       </ion-col>
-      <ion-infinite-scroll class="ion-margin-top" threshold="5%" (ionInfinite)="loadJobsMore($event)">
-        <ion-infinite-scroll-content loadingSpinner="crescent">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+      
     </ion-row>
 
     <ion-row *ngIf="!contentLoader" class="ion-justify-left">
 
-      <ion-col *ngFor="let job of jobs" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+      <ion-col *ngFor="let item of [1, 2, 3, 4, 5, 6]" size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
         <ion-card class="ion-no-margin">
           <ion-row>
             <ion-col size="6">
@@ -127,12 +124,12 @@
         </ion-card>
 
       </ion-col>
-      <ion-infinite-scroll class="ion-margin-top" threshold="5%" (ionInfinite)="loadJobsMore($event)">
+     
+    </ion-row>
+<ion-infinite-scroll class="ion-margin-top" threshold="5%" (ionInfinite)="loadJobsMore($event)">
         <ion-infinite-scroll-content loadingSpinner="crescent">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
-    </ion-row>
-
   </ion-grid>
 
 </ion-content>

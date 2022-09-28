@@ -37,7 +37,6 @@ export class NewsDetialPage implements OnInit {
     this.newsService.getNewsDetails("news/",id).subscribe((res)=>{
       this.news = res;
     });
-
        // Ralate Jobs
 
     this.newsService.getTopRatedNews("news").subscribe((res)=>{

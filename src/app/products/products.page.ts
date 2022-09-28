@@ -16,15 +16,14 @@ export class ProductsPage implements OnInit {
   constructor(
     private productsService:ProductsService,
   ) {
-    setTimeout(()=>{
-      this.contentLoader = true;
-    }, 3000);
+    
    }
 
   ngOnInit() {
+    this.contentLoader= false;
     this.productsService.getTopRatedProduct("products").subscribe((res)=>{
       this.products = this.products.concat(res["data"]);
-     
+     this.contentLoader=true;
     });
   }
 

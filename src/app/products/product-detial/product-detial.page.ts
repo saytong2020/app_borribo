@@ -84,6 +84,7 @@ export class ProductDetialPage implements OnInit {
 
     this.productsService.getTopRatedProduct('products').subscribe((res)=>{
       this.lastesProduct = this.lastesProduct.concat(res['data']);
+      console.log(this.lastesProduct)
     });
   }
 
